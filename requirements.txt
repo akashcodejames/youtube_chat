@@ -4,20 +4,39 @@ streamlit==1.31.0
 # LangChain and LangGraph (compatible versions)
 langgraph==0.2.0
 langchain==0.2.0
-langchain-openai==0.1.23  # Last version compatible with langchain-core<0.3
+langchain-openai==0.1.23
 langchain-core==0.2.40
-langgraph-checkpoint-sqlite
+langchain-text-splitters==0.2.4
+langgraph-checkpoint==1.0.12
+langgraph-checkpoint-sqlite==1.0.4
+langsmith==0.1.147
 
 # Vector Database
 chromadb==0.4.24
+chroma-hnswlib==0.7.3
 
-# YouTube - UPDATED to latest version with new API
+# YouTube
 youtube-transcript-api==1.2.3
 
 # ML & Data Science
 scikit-learn==1.4.0
 numpy==1.26.4
+scipy==1.13.1
+
+# OpenAI
+openai==1.109.1
+tiktoken==0.12.0
 
 # Utilities
-tiktoken>=0.7,<1.0
 python-dotenv==1.0.0
+pydantic==2.12.5
+pydantic-core==2.41.5
+
+# HTTP & Networking
+httpx==0.28.1
+requests==2.32.5
+aiohttp==3.13.2
+
+# Data Handling
+pandas==2.3.3
+pyarrow==21.0.0
