@@ -1,0 +1,23 @@
+# Core Framework
+streamlit==1.31.0
+
+# LangChain and LangGraph (compatible versions)
+langgraph==0.2.0
+langchain==0.2.0
+langchain-openai==0.1.23  # Last version compatible with langchain-core<0.3
+langchain-core==0.2.40
+langgraph-checkpoint-sqlite
+
+# Vector Database
+chromadb==0.4.24
+
+# YouTube - UPDATED to latest version with new API
+youtube-transcript-api==1.2.3
+
+# ML & Data Science
+scikit-learn==1.4.0
+numpy==1.26.4
+
+# Utilities
+tiktoken>=0.7,<1.0
+python-dotenv==1.0.0
