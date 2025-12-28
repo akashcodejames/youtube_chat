@@ -129,9 +129,6 @@ lambda_param = 0.6          # MMR diversity parameter
 - Ensure `streaming=True` in ChatOpenAI config
 - Check browser refresh if auto-reload fails
 
-## 📝 License
-
-MIT License - feel free to use and modify!
 
 ## 🙏 Acknowledgments
 
@@ -139,10 +136,6 @@ MIT License - feel free to use and modify!
 - Powered by [OpenAI](https://openai.com)
 - Transcripts from [youtube-transcript-api](https://github.com/jdepoix/youtube-transcript-api)
 
-## 🤝 Contributing
 
-Contributions welcome! Please feel free to submit a Pull Request.
-
----
 
 Made with ❤️ using LangGraph and Streamlit
