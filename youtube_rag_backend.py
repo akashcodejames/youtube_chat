@@ -2,7 +2,6 @@ from langgraph.graph import StateGraph, START, END
 from typing import TypedDict, Annotated, List
 from langchain_core.messages import BaseMessage, SystemMessage, HumanMessage, AIMessage
 from langchain_groq import ChatGroq
-from langchain_openai import OpenAIEmbeddings
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.graph.message import add_messages
 from dotenv import load_dotenv
@@ -21,7 +20,18 @@ load_dotenv()
 DB_PATH = 'youtube_rag.db'
 CHROMA_PATH = './chroma_db'
 llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=0.7)
-embeddings_model = OpenAIEmbeddings(model="text-embedding-3-small")
+
+# Free embedding function (ChromaDB built-in, uses all-MiniLM-L6-v2 via ONNX - no API key needed)
+from chromadb.utils.embedding_functions import DefaultEmbeddingFunction
+embedding_fn = DefaultEmbeddingFunction()
+
+def embed_text(texts):
+    """Embed a list of texts using the free built-in model"""
+    return embedding_fn(texts)
+
+def embed_single(text):
+    """Embed a single text query"""
+    return embedding_fn([text])[0]
 
 # Initialize ChromaDB
 chroma_client = chromadb.PersistentClient(path=CHROMA_PATH, settings=Settings(anonymized_telemetry=False))
@@ -69,7 +79,7 @@ def semantic_hybrid_chunking(
     if not sentences:
         return []
     
-    sentence_embeddings = embeddings_model.embed_documents(sentences)
+    sentence_embeddings = embed_text(sentences)
     chunks = []
     current_chunk = [sentences[0]]
     current_embedding = np.array(sentence_embeddings[0])
@@ -269,7 +279,7 @@ def process_youtube_video(url: str, thread_id: str) -> bool:
         print(f"Generated {len(chunks)} chunks")
         
         # Generate embeddings
-        embeddings = embeddings_model.embed_documents(chunks)
+        embeddings = embed_text(chunks)
         print(f"Generated embeddings for {len(chunks)} chunks")
         
         # Store in ChromaDB
@@ -316,7 +326,7 @@ def retrieve_from_vectordb(thread_id: str, query: str, k: int = 3) -> str:
             return ""
         
         # Generate query embedding
-        query_embedding = embeddings_model.embed_query(query)
+        query_embedding = embed_single(query)
         
         # Apply MMR
         doc_embeddings = np.array(all_docs['embeddings'])

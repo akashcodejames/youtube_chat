@@ -2,7 +2,6 @@ streamlit
 langgraph
 langchain
 langchain-groq
-langchain-openai
 langchain-core
 langchain-text-splitters
 langgraph-checkpoint-sqlite
@@ -12,3 +11,4 @@ tiktoken
 numpy
 scikit-learn
 python-dotenv
+onnxruntime
