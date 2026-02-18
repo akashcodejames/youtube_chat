@@ -1,7 +1,8 @@
 from langgraph.graph import StateGraph, START, END
 from typing import TypedDict, Annotated, List
 from langchain_core.messages import BaseMessage, SystemMessage, HumanMessage, AIMessage
-from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from langchain_groq import ChatGroq
+from langchain_openai import OpenAIEmbeddings
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.graph.message import add_messages
 from dotenv import load_dotenv
@@ -19,7 +20,7 @@ load_dotenv()
 # ==================== CONFIGURATION ====================
 DB_PATH = 'youtube_rag.db'
 CHROMA_PATH = './chroma_db'
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.7, streaming=True)
+llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=0.7)
 embeddings_model = OpenAIEmbeddings(model="text-embedding-3-small")
 
 # Initialize ChromaDB
